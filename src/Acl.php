@@ -55,6 +55,7 @@ class Acl
             if (!array_key_exists($role->getName(), $this->roles)) {
                 $this->roles[$role->getName()] = $role;
             }
+            return $role;
         } else {
             throw new \Exception("role must be a Role instance or a string");
         }
