@@ -6,6 +6,7 @@
  */
 
 namespace Acl;
+use \Acl\Role       as Role;
 
 class Resource
 {
@@ -44,7 +45,7 @@ class Resource
     /**
      * Allow a role to this resource
      * @param Role $role The role
-     * @return Resource resource
+     * @return Acl\Resource resource
      */
     public function allow(Role $role)
     {
@@ -55,7 +56,7 @@ class Resource
     /**
      * Deny a role to this resource
      * @param Role $role The role
-     * @return Resource resource
+     * @return Acl\Resource resource
      */
     public function deny(Role $role)
     {
