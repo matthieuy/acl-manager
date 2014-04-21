@@ -1,6 +1,6 @@
 # ACL Manager
 
-[![Latest Stable Version](https://poser.pugx.org/matthieuy/acl-manager/v/stable.png)](https://packagist.org/packages/matthieuy/acl-manager) [![Total Downloads](https://poser.pugx.org/matthieuy/acl-manager/downloads.png)](https://packagist.org/packages/matthieuy/acl-manager) [![Latest Unstable Version](https://poser.pugx.org/matthieuy/acl-manager/v/unstable.png)](https://packagist.org/packages/matthieuy/acl-manager) [![License](https://poser.pugx.org/matthieuy/acl-manager/license.png)](https://packagist.org/packages/matthieuy/acl-manager)
+[![Latest Stable Version](https://poser.pugx.org/matthieuy/acl-manager/v/stable.png)](https://packagist.org/packages/matthieuy/acl-manager) [![Total Downloads](https://poser.pugx.org/matthieuy/acl-manager/downloads.png)](https://packagist.org/packages/matthieuy/acl-manager) [![Latest Unstable Version](https://poser.pugx.org/matthieuy/acl-manager/v/unstable.png)](https://packagist.org/packages/matthieuy/acl-manager) [![License](https://poser.pugx.org/matthieuy/acl-manager/license.png)](https://packagist.org/packages/matthieuy/acl-manager) [![Build Status](https://travis-ci.org/matthieuy/acl-manager.svg?branch=master)](https://travis-ci.org/matthieuy/acl-manager)
 
 ### Installation
 To install add the following dependency to your composer.json
