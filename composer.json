@@ -1,0 +1,26 @@
+{
+    "name": "matthieuy/acl-manager",
+    "description": "ACL Manager",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthieu YOURKEVITCH",
+            "email": "matthieuy@gmail.com"
+        }
+    ],
+    "keywords": [
+        "php",
+        "acl",
+        "right",
+        "library"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Acl\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.2.0"
+    }
+}
