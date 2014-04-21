@@ -109,8 +109,8 @@ $resource->isAllowed('roleName');
 
 ## Persistance
 
-You can save/restore role and his rights with `toArray()` and `fromArray()`.
-Use `json_encode()` or `json_decode()` to convert to string.
+You can save/restore role and his rights with `toArray()` and `fromArray()` methods.
+Use `json_encode()` or `json_decode()` function to convert to string/array.
 
 #### Save
  
@@ -125,7 +125,7 @@ if ($role !== null) {
     $rights = json_encode($role->toArray());
 
     // Save it in SQL
-    $query = $pdo->prepare("UPDATE member
+    $query = $pdo->prepare("UPDATE members
                                 SET acl=:acl 
                                 WHERE username=:username
                                 LIMIT 1;
@@ -143,7 +143,7 @@ $roleName = 'admin';
 
 // Get role from DB
 $query = $pdo->prepare("SELECT acl 
-                            FROM member
+                            FROM members
                             WHERE username=:username
                             LIMIT 1;
                         ");
@@ -159,7 +159,26 @@ $roleArray = json_decode($roleString);
 $role = \Acl\Role::fromArray($roleArray);
 $acl->addRole($role);
 
-// You can change the role name
+// You can change/overwrite the role's name
 $role_model = \Acl\Role::fromArray($roleArray, 'modelAdmin');
 $acl->addRole($role_model);
+```
+
+
+#### Save/Restore resources
+
+```php
+// Get all resource in array format
+$listResources = $acl->getResources();
+// Now you can serialize, convert to json $listResources
+
+// Restore resource
+$acl->setResources($listResources);
+```
+
+## Debug
+
+You can see all roles and rights in HTML format with the `debug()` method
+```php
+echo $acl->debug();
 ```

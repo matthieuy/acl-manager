@@ -27,7 +27,7 @@ class Acl
 
     /**
      * Get Acl instance
-     * @return Acl\Acl Acl
+     * @return \Acl\Acl Acl
      */
     public static function getInstance()
     {
@@ -46,7 +46,6 @@ class Acl
     public function addRole($role)
     {
         if (is_string($role)) {
-
             if (!array_key_exists($role, $this->roles)) {
                 $this->roles[$role] = new Role($role);
                 return $this->roles[$role];
@@ -65,7 +64,7 @@ class Acl
      * Add many roles
      * @param Acl\Role[]|string[] Roles to add
      * @throws Exception Role's type is invalid
-     * @return Acl\Acl ACL
+     * @return \Acl\Acl ACL
      */
     public function addRoles(array $roles)
     {
@@ -79,7 +78,7 @@ class Acl
     /**
      * Delete a role
      * @param string $name Role's name
-     * @return Acl\Acl ACL
+     * @return \Acl\Acl ACL
      */
     public function delRole($name)
     {
@@ -146,7 +145,7 @@ class Acl
      * Add many resources
      * @param Acl\Resource[]|string[] Resources to add or their names
      * @throws Exception Resource's type is invalid
-     * @return Acl\Acl ACL
+     * @return \Acl\Acl ACL
      */
     public function addResources(array $resources)
     {
@@ -181,10 +180,19 @@ class Acl
     }
 
     /**
+     * Set all resources (use for import/restore)
+     * @param array $resources The list of resources
+     */
+    public function setResources(array $resources)
+    {
+        $this->resources = $resources;
+    }
+
+    /**
      * Allow a role to resource
      * @param Acl\Role $role The role
      * @param Resource $resource The resource
-     * @return Acl\Acl ACL
+     * @return \Acl\Acl ACL
      */
     public function allow(Role $role, Resource $resource)
     {
@@ -197,7 +205,7 @@ class Acl
      * @param Acl\Role $role The role
      * @param Acl\Resource $resource The resource
      * @throws Exception The role don't exist
-     * @return Acl\Acl ACL
+     * @return \Acl\Acl ACL
      */
     public function deny(Role $role, Resource $resource)
     {
@@ -243,5 +251,45 @@ class Acl
 
         // Nothing find : deny
         return false;
+    }
+
+    /**
+     * Get all ACL in HTML format (use for debug)
+     * @return string The HTML code
+     */
+    public function debug()
+    {
+        $html = '<h1>ACL Manager</h1>';
+
+        // Roles
+        $html .= '<h2>Roles</h2><ul>';
+        foreach ($this->roles as $roleName => $role) {
+            $html .= '<li>'.$roleName;
+            $parents = $role->getParents();
+            if (count($parents) > 0) {
+                $html .= ' inherit of '.implode(' and ', $parents);
+            }
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+
+        // Right
+        $html .= '<h2>Rights by resources</h2><ul>';
+        foreach ($this->resources as $scope => $ressources) {
+            $html .= '<li>'.$scope.' : <ul>';
+            foreach ($ressources as $resourceName => $resource) {
+                $html .= '<li>'.$resourceName.' : ';
+                $rights = array();
+                foreach ($this->roles as $roleName => $role) {
+                    $color = ($this->isAllowed($role, $resource, $scope)) ? 'green' : 'red';
+                    $rights[] = '<span style="color:'.$color.';">'.$roleName.'</span>';
+                }
+                $html .= implode(', ', $rights).'</li>';
+            }
+            $html .= '</ul></li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
     }
 }
