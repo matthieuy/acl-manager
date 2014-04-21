@@ -43,12 +43,12 @@ $acl->addRole('admin');
 $acl->addRoles(array('publisher', 'validator'));
 
 // You can use inheritance
-$publisher = $acl->getRole('publisher');
-$publisher->addParent('admin');
+$acl->getRole('publisher')->addParent('admin');
+$admin->addParent('root');
 ```
 
 
-#### Create Resource
+#### Create Resources
 ```php
 // Create Resource
 $readNews = new \Acl\Resource('read', 'news');
@@ -120,7 +120,7 @@ $role = $acl->getRole($roleName);
 // Save it
 if ($role !== null) {
     // Convert role to string
-    $acl = json_encode($role->toArray());
+    $rights = json_encode($role->toArray());
 
     // Save it in SQL
     $query = $pdo->prepare("UPDATE member
@@ -130,7 +130,7 @@ if ($role !== null) {
                             ");
     $query->execute(array(
                         'username' => $roleName,
-                        'acl' => $acl
+                        'acl' => $rights
 }
 ```
 
