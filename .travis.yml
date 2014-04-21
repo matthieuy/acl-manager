@@ -12,3 +12,6 @@ php:
 
 script:
   - phpcs --standard=PSR2 ./src
+
+notifications:
+  email: false
