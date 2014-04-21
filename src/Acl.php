@@ -36,7 +36,7 @@ class Acl
     /**
      * Add a role
      * @param Role|string $role The role to add or the role's name
-     * @throws Exception Role's type is invalid
+     * @throws \Exception Role's type is invalid
      * @return Role The role added
      */
     public function addRole($role)
@@ -50,7 +50,7 @@ class Acl
                 $this->roles[$role->getName()] = $role;
             }
         } else {
-            throw new Exception("role must be a Role instance or a string");
+            throw new \Exception("role must be a Role instance or a string");
         }
 
         return $this->roles[$role->getName()];
@@ -59,7 +59,7 @@ class Acl
     /**
      * Add many roles
      * @param Role[]|string[] Roles to add
-     * @throws Exception Role's type is invalid
+     * @throws \Exception Role's type is invalid
      * @return Acl ACL
      */
     public function addRoles(array $roles)
@@ -113,7 +113,7 @@ class Acl
     /**
      * Add a resource
      * @param Resource|string Resource to add or this name
-     * @throws Exception Resource's type is invalid
+     * @throws \Exception Resource's type is invalid
      * @return Resource resource added
      */
     public function addResource($resource)
@@ -126,7 +126,7 @@ class Acl
             $scope = $resource->getScope();
             $name = $resource->getName();
         } else {
-            throw new Exception("The resource must be a instance of Resource or a string");
+            throw new \Exception("The resource must be a instance of Resource or a string");
         }
 
         // Add
@@ -140,7 +140,7 @@ class Acl
     /**
      * Add many resources
      * @param Resource[]|string[] Resources to add or their names
-     * @throws Exception Resource's type is invalid
+     * @throws \Exception Resource's type is invalid
      * @return Acl ACL
      */
     public function addResources(array $resources)

@@ -60,7 +60,7 @@ $acl->addResources(array(
 
 // Or with string (the defaut module is "global")
 $acl->addResource('login');
-$acl->addResources('connect', 'contact', 'profil');
+$acl->addResources(array('connect', 'contact', 'profil'));
 ```
 
 
@@ -85,13 +85,15 @@ $resource->deny($role);
 // Now, you can check right
 // With the Acl object
 $result = $acl->isAllowed($admin, $readNews);
-$result = $acl->isAllowed('admin', 'read', 'news');
-$result = $acl->isAllowed('role', 'resource', 'module');
 if ($result) {
     echo "Allow";
 } else {
     echo "Deny";
 }
+// Or
+$acl->isAllowed('admin', 'read', 'news');
+$acl->isAllowed('roleName', 'resourceName', 'moduleName');
+
 
 // With the Role object
 $admin->isAllowed($readNews);

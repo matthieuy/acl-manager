@@ -47,13 +47,14 @@ class Role
     /**
      * Add a parent
      * @param Role|string $parent The parent's role or his name
+     * @throws \Exception The role can't be the parent of himself
      * @return Role This role
      */
     public function addParent($parent)
     {
         $parent = (string) $parent;
         if ($parent == $this->getName()) {
-            throw new Exception("The role can't be the parent of himself");
+            throw new \Exception("The role can't be the parent of himself");
         } elseif (!in_array($parent, $this->parents)) {
             $this->parents[] = $parent;
         }
@@ -152,12 +153,13 @@ class Role
      * Set a role by array
      * @param array $array The role's info
      * @param string|null $name The role name (for overwrite the array info)
+     * @throws \Exception Name must exist
      * @return Role The role
      */
     public static function fromArray(array $array, $name = null)
     {
         if ($name === null && !array_key_exists('name', $array)) {
-            throw new Exception("You must give a name for the role", E_USER_ERROR);
+            throw new \Exception("You must give a name for the role", E_USER_ERROR);
         }
 
         // Get info
