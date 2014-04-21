@@ -6,10 +6,10 @@
  */
 
 namespace Acl;
+
 use \Exception      as Exception;
 use \Acl\Role       as Role;
 use \Acl\Resource   as Resource;
-
 
 class Role
 {

@@ -6,6 +6,7 @@
  */
 
 namespace Acl;
+
 use \Acl\Role       as Role;
 
 class Resource
