@@ -6,6 +6,10 @@
  */
 
 namespace Acl;
+use \Exception      as Exception;
+use \Acl\Role       as Role;
+use \Acl\Resource   as Resource;
+
 
 class Role
 {
@@ -47,6 +51,7 @@ class Role
     /**
      * Add a parent
      * @param Role|string $parent The parent's role or his name
+     * @throws Exception The role can't be the parent of himself
      * @return Role This role
      */
     public function addParent($parent)
@@ -152,6 +157,7 @@ class Role
      * Set a role by array
      * @param array $array The role's info
      * @param string|null $name The role name (for overwrite the array info)
+     * @throws Exception Name must exist
      * @return Role The role
      */
     public static function fromArray(array $array, $name = null)
