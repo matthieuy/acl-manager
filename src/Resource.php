@@ -43,8 +43,8 @@ class Resource
 
     /**
      * Allow a role to this resource
-     * @param Role $role The role
-     * @return Resource resource
+     * @param Acl\Role $role The role
+     * @return Acl\Resource resource
      */
     public function allow(Role $role)
     {
@@ -54,8 +54,8 @@ class Resource
 
     /**
      * Deny a role to this resource
-     * @param Role $role The role
-     * @return Resource resource
+     * @param Acl\Role $role The role
+     * @return Acl\Resource resource
      */
     public function deny(Role $role)
     {
@@ -65,7 +65,7 @@ class Resource
 
     /**
      * Check if role can access to this resource
-     * @param Role $role The role to check
+     * @param Acl\Role $role The role to check
      * @return boolean Allow or deny
      */
     public function isAllowed(Role $role)

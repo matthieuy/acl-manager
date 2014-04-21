@@ -23,7 +23,7 @@ class Acl
 
     /**
      * Get Acl instance
-     * @return Acl Acl
+     * @return Acl\Acl Acl
      */
     public static function getInstance()
     {
@@ -35,9 +35,9 @@ class Acl
 
     /**
      * Add a role
-     * @param Role|string $role The role to add or the role's name
+     * @param Acl\Role|string $role The role to add or the role's name
      * @throws \Exception Role's type is invalid
-     * @return Role The role added
+     * @return Acl\Role The role added
      */
     public function addRole($role)
     {
@@ -45,7 +45,7 @@ class Acl
             if (!array_key_exists($role, $this->roles)) {
                 $this->roles[$role] = new Role($role);
             }
-        } elseif (is_a($role, 'Role')) {
+        } elseif (is_a($role, 'Acl\Role')) {
             if (!array_key_exists($role->getName(), $this->roles)) {
                 $this->roles[$role->getName()] = $role;
             }
@@ -58,9 +58,9 @@ class Acl
 
     /**
      * Add many roles
-     * @param Role[]|string[] Roles to add
+     * @param Acl\Role[]|string[] Roles to add
      * @throws \Exception Role's type is invalid
-     * @return Acl ACL
+     * @return Acl\Acl ACL
      */
     public function addRoles(array $roles)
     {
@@ -74,7 +74,7 @@ class Acl
     /**
      * Delete a role
      * @param string $name Role's name
-     * @return Acl ACL
+     * @return Acl\Acl ACL
      */
     public function delRole($name)
     {
@@ -91,7 +91,7 @@ class Acl
     /**
      * Get a role
      * @param string $name The role's name
-     * @return Role|null The role or null if unset
+     * @return Acl\Role|null The role or null if unset
      */
     public function getRole($name)
     {
@@ -103,7 +103,7 @@ class Acl
 
     /**
      * Get all roles
-     * @return Role[] Roles
+     * @return Acl\Role[] Roles
      */
     public function getRoles()
     {
@@ -112,9 +112,9 @@ class Acl
 
     /**
      * Add a resource
-     * @param Resource|string Resource to add or this name
+     * @param Acl\Resource|string Resource to add or this name
      * @throws \Exception Resource's type is invalid
-     * @return Resource resource added
+     * @return Acl\Resource resource added
      */
     public function addResource($resource)
     {
@@ -122,7 +122,7 @@ class Acl
             $scope = 'global';
             $name = $resource;
             $resource = new Resource($name, $scope);
-        } elseif (is_a($resource, 'Resource')) {
+        } elseif (is_a($resource, 'Acl\Resource')) {
             $scope = $resource->getScope();
             $name = $resource->getName();
         } else {
@@ -139,9 +139,9 @@ class Acl
 
     /**
      * Add many resources
-     * @param Resource[]|string[] Resources to add or their names
+     * @param Acl\Resource[]|string[] Resources to add or their names
      * @throws \Exception Resource's type is invalid
-     * @return Acl ACL
+     * @return Acl\Acl ACL
      */
     public function addResources(array $resources)
     {
@@ -156,7 +156,7 @@ class Acl
      * Get a resource
      * @param string $name The resource's name
      * @param string $scope The scope
-     * @return Resource|null Resource or null if unset
+     * @return Acl\Resource|null Resource or null if unset
      */
     public function getResource($name, $scope = 'global')
     {
@@ -177,9 +177,9 @@ class Acl
 
     /**
      * Allow a role to resource
-     * @param Role $role The role
+     * @param Acl\Role $role The role
      * @param Resource $resource The resource
-     * @return Acl ACL
+     * @return Acl\Acl ACL
      */
     public function allow(Role $role, Resource $resource)
     {
@@ -189,10 +189,10 @@ class Acl
 
     /**
      * Deny a role to resource
-     * @param Role $role The role
-     * @param Resource $resource The resource
+     * @param Acl\Role $role The role
+     * @param Acl\Resource $resource The resource
      * @throws Exception The role don't exist
-     * @return Acl ACL
+     * @return Acl\Acl ACL
      */
     public function deny(Role $role, Resource $resource)
     {
@@ -202,16 +202,16 @@ class Acl
 
     /**
      * Test if a role can acces to a resource
-     * @param Role|string $role The role or his name
-     * @param Resource|string $resource The resource or his name
+     * @param Acl\Role|string $role The role or his name
+     * @param Acl\Resource|string $resource The resource or his name
      * @param string $scope The scope (need only if $resource is string)
      * @return boolean Allow or deny
      */
     public function isAllowed($role, $resource, $scope = 'global')
     {
         // Get Role and resource
-        $role = (is_a($role, 'Role')) ? $role : $this->getRole($role);
-        $resource = (is_a($resource, 'Resource')) ? $resource : $this->getResource($resource, $scope);
+        $role = (is_a($role, 'Acl\Role')) ? $role : $this->getRole($role);
+        $resource = (is_a($resource, 'Acl\Resource')) ? $resource : $this->getResource($resource, $scope);
 
         // Role or resource don't exist : deny
         if ($role === null || $resource === null) {

@@ -16,7 +16,7 @@ class Role
     /**
      * Constructor
      * @param string $name The name of the role
-     * @param string[]|Role[] $parents List of parent role (name or Role instance)
+     * @param string[]|Acl\Role[] $parents List of parent role (name or Role instance)
      */
     public function __construct($name, array $parents = array())
     {
@@ -46,9 +46,9 @@ class Role
 
     /**
      * Add a parent
-     * @param Role|string $parent The parent's role or his name
+     * @param Acl\Role|string $parent The parent's role or his name
      * @throws \Exception The role can't be the parent of himself
-     * @return Role This role
+     * @return Acl\Role This role
      */
     public function addParent($parent)
     {
@@ -64,12 +64,12 @@ class Role
 
     /**
      * Delete the parent (only the link)
-     * @param Role|string $parent Parent (Role or his name)
-     * @return Role This role
+     * @param Acl\Role|string $parent Parent (Role or his name)
+     * @return Acl\Role This role
      */
     public function delParent($parent)
     {
-        if (is_a($parent, 'Role')) {
+        if (is_a($parent, 'Acl\Role')) {
             $parent = $parent->getName();
         }
         if (($index = array_search($parent, $this->parents)) !== false) {
@@ -81,8 +81,8 @@ class Role
 
     /**
      * Allow a resource to this role
-     * @param Resource $resouce The resource
-     * @return Role This role
+     * @param Acl\Resource $resouce The resource
+     * @return Acl\Role This role
      */
     public function allow(Resource $resource)
     {
@@ -91,8 +91,8 @@ class Role
 
     /**
      * Deny a resource to this role
-     * @param Resource $resource The resource
-     * @return Role This role
+     * @param Acl\Resource $resource The resource
+     * @return Acl\Role This role
      */
     public function deny($resource)
     {
@@ -101,7 +101,7 @@ class Role
 
     /**
      * Check if this role can access to the resource
-     * @param Resource|string $resource The resource or his name
+     * @param Acl\Resource|string $resource The resource or his name
      * @return boolean Allow or deny
      */
     public function isAllowed($resource)
@@ -154,7 +154,7 @@ class Role
      * @param array $array The role's info
      * @param string|null $name The role name (for overwrite the array info)
      * @throws \Exception Name must exist
-     * @return Role The role
+     * @return Acl\Role The role
      */
     public static function fromArray(array $array, $name = null)
     {
@@ -176,9 +176,9 @@ class Role
 
     /**
      * Add access info
-     * @param Resource $resource The resource
+     * @param Acl\Resource $resource The resource
      * @param boolean $access Allow or deny
-     * @return Role The role
+     * @return Acl\Role The role
      */
     private function addAccess(Resource $resource, $access)
     {
