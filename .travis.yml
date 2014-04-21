@@ -1,0 +1,14 @@
+language: php
+
+before_script:
+  - pear install PHP_CodeSniffer
+  - phpenv rehash
+  - ./composer.phar install --dev --prefer-source --no-interaction
+
+php:
+  - 5.2
+  - 5.3
+  - 5.4
+
+script:
+  - phpcs --standard=PSR2 ./src

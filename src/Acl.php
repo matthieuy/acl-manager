@@ -16,7 +16,8 @@ class Acl
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         self::$instance = $this;
     }
 
@@ -24,7 +25,8 @@ class Acl
      * Get Acl instance
      * @return Acl Acl
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!isset(self::$instance)) {
             self::$instance = new Acl();
         }
@@ -91,7 +93,7 @@ class Acl
      * @param string $name The role's name
      * @return Role|null The role or null if unset
      */
-    public function getRole($name) 
+    public function getRole($name)
     {
         if (isset($this->roles[$name])) {
             return $this->roles[$name];
@@ -156,7 +158,7 @@ class Acl
      * @param string $scope The scope
      * @return Resource|null Resource or null if unset
      */
-    public function getResource($name, $scope='global')
+    public function getResource($name, $scope = 'global')
     {
         if (isset($this->resources[$scope][$name])) {
             return $this->resources[$scope][$name];
@@ -205,7 +207,7 @@ class Acl
      * @param string $scope The scope (need only if $resource is string)
      * @return boolean Allow or deny
      */
-    public function isAllowed($role, $resource, $scope='global')
+    public function isAllowed($role, $resource, $scope = 'global')
     {
         // Get Role and resource
         $role = (is_a($role, 'Role')) ? $role : $this->getRole($role);

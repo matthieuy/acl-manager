@@ -49,7 +49,8 @@ class Role
      * @param Role|string $parent The parent's role or his name
      * @return Role This role
      */
-    public function addParent($parent) {
+    public function addParent($parent)
+    {
         $parent = (string) $parent;
         if ($parent == $this->getName()) {
             throw new Exception("The role can't be the parent of himself");
@@ -65,11 +66,12 @@ class Role
      * @param Role|string $parent Parent (Role or his name)
      * @return Role This role
      */
-    public function delParent($parent) {
+    public function delParent($parent)
+    {
         if (is_a($parent, 'Role')) {
             $parent = $parent->getName();
         }
-        if(($index = array_search($parent, $this->parents)) !== false) {
+        if (($index = array_search($parent, $this->parents)) !== false) {
             unset($this->parents[$index]);
         }
 
@@ -113,7 +115,8 @@ class Role
      * @access private
      * @return array The access
      */
-    public function getAccess() {
+    public function getAccess()
+    {
         return $this->access;
     }
 
@@ -151,7 +154,7 @@ class Role
      * @param string|null $name The role name (for overwrite the array info)
      * @return Role The role
      */
-    public static function fromArray(array $array, $name=null)
+    public static function fromArray(array $array, $name = null)
     {
         if ($name === null && !array_key_exists('name', $array)) {
             throw new Exception("You must give a name for the role", E_USER_ERROR);
@@ -188,7 +191,8 @@ class Role
      * @param array $access The access
      * @see fromArray()
      */
-    private function setAccess(array $access) {
+    private function setAccess(array $access)
+    {
         $this->access = $access;
     }
 }

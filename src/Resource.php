@@ -17,7 +17,7 @@ class Resource
      * @param string $name The name of the resource
      * @param string $scope The scope
      */
-    public function __construct($name, $scope='global')
+    public function __construct($name, $scope = 'global')
     {
         $this->name = $name;
         $this->scope = $scope;
@@ -27,7 +27,7 @@ class Resource
      * Get the resource's name
      * @return string The name
      */
-    public function getName() 
+    public function getName()
     {
         return $this->name;
     }
